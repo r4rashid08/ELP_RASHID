@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="ZOOM_IN_BUTTON_ID" type="id" />
+    <item name="ZOOM_OUT_BUTTON_ID" type="id" />
+    <item name="YOUR_TOUCH_IMAGE_VIEW_" type="id" />
+    <item name="YOUR_TOUCH_IMAGE_VIEW_ID" type="id" />
+    <item name="action_settings" type="id" />
+</resources>

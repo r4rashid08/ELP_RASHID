@@ -1,0 +1,178 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/tableLayout1"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@color/black"
+              android:orientation="vertical"
+    >
+
+
+
+            <TextView
+                android:id="@+id/tv2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_gravity="left"
+                android:paddingLeft="50dp"
+                android:text="You Can Change Application Mode"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="@color/white"
+
+                />
+
+
+
+        <Button
+            android:id="@+id/mode"
+            android:layout_width="wrap_content"
+            android:layout_height="55dp"
+            android:background="@color/black"
+            android:hint="@string/Mode"
+            android:onClick="onClick"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingTop="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#444444"/>
+
+        <Button
+            android:id="@+id/btnTakePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/black"
+            android:onClick="onClick"
+            android:paddingLeft="50dp"
+            android:paddingTop="20dp"
+            android:text="@string/Registration"
+            android:gravity="left"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#444444"/>
+
+        <Button
+            android:id="@+id/btnArrival"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/black"
+            android:onClick="onClick"
+            android:paddingTop="20dp"
+            android:gravity="left"
+            android:paddingLeft="50dp"
+            android:text="@string/Arrival"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#444444"/>
+
+        <Button
+            android:id="@+id/btncheckvichle"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/black"
+            android:gravity="left"
+            android:onClick="onClick"
+            android:paddingTop="20dp"
+            android:paddingLeft="50dp"
+            android:text="@string/CheckRegistration"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#444444"/>
+
+        <Button
+            android:id="@+id/btnqueue"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="left"
+            android:paddingTop="20dp"
+            android:background="@color/black"
+            android:onClick="onClick"
+            android:paddingLeft="50dp"
+            android:text="@string/Photos"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#444444"/>
+
+        <Button
+            android:id="@+id/btnConfigration"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/black"
+            android:onClick="onClick"
+            android:gravity="left"
+            android:paddingTop="20dp"
+            android:text="@string/Configration"
+            android:paddingLeft="50dp"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dip"
+            android:background="#444444"/>
+
+        <Button
+            android:id="@+id/btnupdate"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@color/black"
+            android:onClick="onClick"
+            android:gravity="left"
+            android:paddingTop="20dp"
+            android:text="@string/Update"
+            android:textColor="@color/white"
+            android:paddingLeft="50dp"
+            android:textSize="20sp"/>
+
+        <View
+            android:layout_height="1dp"
+            android:background="#444444"
+            android:layout_width="match_parent"/>
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#000000"
+
+        >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal"
+            android:text="Developed By.. MIS Department Sharif Group"
+            android:textColor="@color/white"
+            android:textSize="22px"
+            android:textStyle="italic"/>
+
+        />
+    </LinearLayout>
+
+</LinearLayout>

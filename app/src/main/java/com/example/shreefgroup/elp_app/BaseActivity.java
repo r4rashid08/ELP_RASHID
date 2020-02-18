@@ -3,8 +3,8 @@ package com.example.shreefgroup.elp_app;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Created by Syed Raza Mehdi Naqvi on 8/16/2016.

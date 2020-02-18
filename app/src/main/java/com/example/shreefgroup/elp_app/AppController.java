@@ -6,7 +6,7 @@ package com.example.shreefgroup.elp_app;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.multidex.MultiDex;
+import androidx.multidex.MultiDex;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -16,7 +16,6 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 import java.io.File;
-import java.util.ArrayList;
 
 
 public class AppController extends Application {
@@ -44,20 +43,20 @@ public class AppController extends Application {
     public static final String KEY_Reg = "REGISTRATION";
     public static final String KEY_simNo = "MOBILE";
     public static final String IMAGE_DIRECTORY_NAME = "Images";
-    public static String baseUrl = "";
-    public static final String strURLUpload_Arrival = "/cpl/andriod_conn/upload_arrival.php";
-    public static final String strUrlServer_Arrival = "/cpl/andriod_conn/upload.php";
-    public static final String strURLUpload = "/cpl/andriod_conn/upload.php";
-    public static final String strUrlServer = "/cpl/andriod_conn/upload.php";
-    public static final String URL4 = "/cpl/andriod_conn/GET_REGNO.PHP";
-    public static final String IMEI = "/MobileApps/eEms/IMEI_NO.PHP";
-    public static final String URL2 = "/cpl/andriod_conn/ELP_CONFIG2.PHP";
-    public static final String URL3 = "/cpl/andriod_conn/elp_arrival.PHP";
-    public static final String FILE_UPLOAD_URL = "/cpl/andriod_conn/uploadFile.php";
-    public static final String DATA_URL = "/cpl/andriod_conn/retrievedata.php";
-    public static final String Verify = "/cpl/andriod_conn/VerifyReg_No.php";
-    public static final String DELETE_LIST_ITEM = "/cpl/andriod_conn/DELETE_REG.php";
-    public static final String DELETE_All_LIST_ITEM = "/cpl/andriod_conn/DELETE_ALLREG.php";
+    public static String baseUrl = "http://scorpio.sgroup.pk:8085";
+    public static final String strURLUpload_Arrival = "/ELP/upload_arrival.php";
+    public static final String strUrlServer_Arrival = "/ELP/upload.php";
+    public static final String strURLUpload = "/ELP/upload.php";
+    public static final String strUrlServer = "/ELP/upload.php";
+    public static final String URL4 = "/ELP/GET_REGNO.PHP";
+    public static final String IMEI = "/ELP/IMEI_NO.PHP";
+    public static final String URL2 = "/ELP/ELP_CONFIG2.PHP";
+    public static final String URL3 = "/ELP/elp_arrival.PHP";
+    public static final String FILE_UPLOAD_URL = "/ELP/uploadFile.php";
+    public static final String DATA_URL = "/ELP/retrievedata.php";
+    public static final String Verify = "/ELP/VerifyReg_No.php";
+    public static final String DELETE_LIST_ITEM = "/ELP/DELETE_REG.php";
+    public static final String DELETE_All_LIST_ITEM = "/ELP/DELETE_ALLREG.php";
     private static AppController mInstance;
     public String tv1 = "";
     public String tv2 = "";

@@ -5,6 +5,7 @@ package com.example.shreefgroup.elp_app;
  */
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -33,11 +34,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AlertDialog;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import androidx.appcompat.app.AlertDialog;
 import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
@@ -58,7 +60,7 @@ import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.Date;
 
-public class SmartLocationManager extends ActionBarActivity implements
+public class SmartLocationManager extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
     public static final int NETWORK_PROVIDER = 1;
@@ -419,22 +421,20 @@ public class SmartLocationManager extends ActionBarActivity implements
     }
 
 
-    public Location getLastKnownLocation() {
+    public void getLastKnownLocation() {
         locationProvider = LocationManager.NETWORK_PROVIDER;
         Location lastKnownLocation = null;
         // Or use LocationManager.GPS_PROVIDER
         if (Build.VERSION.SDK_INT >= 23 &&
                 ContextCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(mContext, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return lastKnownLocation;
+            return;
         }
         try {
             lastKnownLocation = locationManager.getLastKnownLocation(locationProvider);
-            return lastKnownLocation;
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }
-        return lastKnownLocation;
     }
 
     public boolean isGooglePlayServicesAvailable() {
@@ -942,21 +942,23 @@ public class SmartLocationManager extends ActionBarActivity implements
 
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public int checkUriPermission(Uri uri, int pid, int uid, int modeFlags) {
         return 0;
     }
-
+    @SuppressLint("WrongConstant")
     @Override
     public int checkCallingUriPermission(Uri uri, int modeFlags) {
         return 0;
     }
 
+    @SuppressLint("WrongConstant")
     @Override
     public int checkCallingOrSelfUriPermission(Uri uri, int modeFlags) {
         return 0;
     }
-
+    @SuppressLint("WrongConstant")
     @Override
     public int checkUriPermission(Uri uri, String readPermission, String writePermission, int pid, int uid, int modeFlags) {
         return 0;

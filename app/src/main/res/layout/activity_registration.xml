@@ -1,9 +1,8 @@
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:id="@+id/tableLayout1"
-             android:layout_width="fill_parent"
-             android:layout_height="fill_parent"
-             android:background="@color/black"
-    >
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/black">
 
 
 
@@ -11,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.1"
-        android:gravity="left"
         android:orientation="horizontal"
 
         >
@@ -29,6 +27,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="left"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="20dp"
                 android:text="You can change the application mode"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
                 android:textColor="@color/white"
@@ -44,12 +44,11 @@
 
         <Button
             android:id="@+id/mode"
-            android:layout_width="wrap_content"
-            android:layout_height="55dp"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
             android:background="@color/black"
             android:hint="Please set the app mode"
-            android:onClick="onClick"
-            android:layout_gravity="left"
+             android:textSize="20sp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/white"
             android:textColorHint="@color/white"
@@ -71,7 +70,7 @@
             android:background="@color/black"
             android:onClick="onClick"
             android:text="New Vehicle Registration"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textSize="20sp"/>
 
         <View
@@ -84,9 +83,9 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@color/black"
-            android:onClick="onClick"
+
             android:text="@string/Arrival"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textSize="20sp"
             />
 
@@ -100,9 +99,8 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@color/black"
-            android:onClick="onClick"
             android:text="@string/CheckRegistration"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textSize="20sp"/>
 
         <View
@@ -116,9 +114,8 @@
             android:layout_height="65dp"
             android:layout_gravity="center_horizontal"
             android:background="@color/black"
-            android:onClick="onClick"
             android:text="@string/Photos"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textSize="20sp"/>
 
         <View
@@ -131,9 +128,9 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@color/black"
-            android:onClick="onClick"
+
             android:text="@string/Configration"
-            android:textColor="#FFFFFF"
+            android:textColor="@android:color/white"
             android:textSize="20sp"/>
 
         <View
@@ -146,7 +143,6 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:background="@color/black"
-            android:onClick="onClick"
             android:text="Update"
             android:textColor="@color/white"
             android:textSize="20sp"/>
@@ -161,13 +157,13 @@
         android:id="@+id/LinearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#000000"
+        android:background="@android:color/black"
 
         >
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
@@ -175,8 +171,6 @@
             android:textColor="@color/white"
             android:textSize="15dp"
             android:textStyle="bold"/>
-
-        />
     </LinearLayout>
 
 </TableLayout>

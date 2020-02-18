@@ -5,6 +5,7 @@ package com.example.shreefgroup.elp_app;
  */
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
@@ -16,11 +17,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class FileHelper_offlineRegistration {
     final static String fileName = "Pendingdata.txt";
     final static String path = Environment.getExternalStorageDirectory()+"/ELP" + "/";
     final static String TAG = FileHelper_Settings.class.getName();
+    private static String data;
+
     public static String ReadFile(Context context) {
         String line = null;
 
@@ -45,7 +49,9 @@ public class FileHelper_offlineRegistration {
         return line;
     }
 
-    public static boolean saveToFile(String data) {
+    @SuppressLint("NewApi")
+    static boolean saveToFile(String data) {
+        FileHelper_offlineRegistration.data = data;
         try {
             new File(path).mkdir();
             File file = new File(path + fileName);
@@ -57,7 +63,7 @@ public class FileHelper_offlineRegistration {
 
             return true;
         } catch (FileNotFoundException ex) {
-            Log.d(TAG, ex.getMessage());
+            Log.d(TAG, Objects.requireNonNull(ex.getMessage()));
         } catch (IOException ex) {
             Log.d(TAG, ex.getMessage());
         }

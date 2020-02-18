@@ -47,7 +47,7 @@ public class FileHelper_offlineArrival {
         }
         return line;
     }
-    public static boolean saveToFile(String data) {
+    static boolean saveToFile(String data) {
         try {
             new File(path).mkdir();
             File file = new File(path + offlineArrival);

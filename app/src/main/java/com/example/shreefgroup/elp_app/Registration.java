@@ -1,6 +1,7 @@
 package com.example.shreefgroup.elp_app;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -24,10 +25,11 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import android.telephony.TelephonyManager;
 import android.telephony.gsm.GsmCellLocation;
 import android.util.Log;
@@ -81,6 +83,8 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -98,7 +102,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
     final static String path = Environment.getExternalStorageDirectory() + "/ELP" + "/";
     final static String fileSetting = "SettingsELP.txt";
     final static String file_IMEI = "IMEI_NO.txt";
-    private static final int REQUEST_TAKE_PHOTO = 1;
+     public final int REQUEST_TAKE_PHOTO = 1;
     private final static String fileName = "Pendingdata.txt";
     private final static String fileMode = "AppMode.txt";
     private final static String CAPTURED_PHOTO_PATH_KEY = "mCurrentPhotoPath";
@@ -111,11 +115,11 @@ public class Registration extends Activity implements LocationManagerInterface, 
     private static InputStream is = null;
     private static JSONObject jObj = null;
     private static String json = "";
-    private String CellLocation, GSM_CELL_ID, GSM_Location_Code;
+    public String CellLocation, GSM_CELL_ID, GSM_Location_Code;
     private String DeviceId;
-    private File image;
-    private BadgeView badge;
-    private AppController application;
+   File image;
+     BadgeView badge;
+    AppController application;
     private int n = 1000;
     private String[] web = {
             "Registration Mode",
@@ -123,30 +127,29 @@ public class Registration extends Activity implements LocationManagerInterface, 
             "Both Mode",
 
     };
-    private ArrayList<String> arrayList5 = new ArrayList<String>();
-    private ArrayList<String> arrayList7 = new ArrayList<String>();
-    private ArrayList<String> arrayListMode = new ArrayList<String>();
-    private ArrayList<String> arrayIndex = new ArrayList<String>();
+    private ArrayList<String> arrayList5 = new ArrayList<>();
+    public ArrayList<String> arrayList7 = new ArrayList<>();
+    private ArrayList<String> arrayListMode = new ArrayList<>();
+    private ArrayList<String> arrayIndex = new ArrayList<>();
     private String resMessage = "";
-    private SmartLocationManager mLocationManager;
+    public SmartLocationManager mLocationManager;
     private double LAT, LNG;
     private ProgressDialog loading = null;
     private int IMEI_NUM;
     private String indexid;
-    private File file;
+    public File file;
     private String end_date;
     private Date date;
-    private String currunt_date;
+    String currunt_date;
     private Date date2;
-    private String fistname;
-    private String secondname;
-    private String therdname;
-    private Button btnconfig;
+     String fistname;
+    String secondname;
+   public String therdname;
     private Button btnTakePhoto;
     private Button btnqueue;
     private String imageFileName;
-    private File photoFile;
-    private File storageDir;
+   public File photoFile;
+   public File storageDir;
     private Uri uri;
     private String myfileName;
     private String timeStamp;
@@ -155,27 +158,23 @@ public class Registration extends Activity implements LocationManagerInterface, 
     private String user_text;
     private int count = 0;
     private ProgressDialog mProgressDialog;
-    private String tv, tv2, tv3, tv4, tv5, tv6, tv7, tv8, tv9;
-    private String txv, txv2, txv3, txv4, txv5, txv6, txv7, txv8, txv9, txv10;
+     public String tv, tv2, tv3, tv4, tv5, tv6, tv7, tv8;
+    public String txv, txv2, txv3, txv4, txv5, txv6, txv7, txv8;
     private HttpURLConnection conn;
     private int resCode = 0;
-    private Intent takePictureIntent;
     private Button btn_Record;
     private Button btnupdate;
     private int counter = 0;
     private String md;
     private String md2;
     private String modecheck;
-    private String mfilename, mfilename2, mfilename3;
     private File RemoveFile = new File(path, fileName);
     private int max = 1000;
     protected static final int REQUEST_CHECK_SETTINGS = 0x1;
     private int permissionCheck = 0;
-    private int flage = 0;
-    private int[] grantResults;
-    private static final int MY_PERMISSIONS_REQUEST_READ_CONTACTS = 1;
-    private ArrayList<String> imageArray = new ArrayList<String>();
-    ;
+
+     ArrayList<String> imageArray = new ArrayList<>();
+
 
 
     /****************************************************/
@@ -216,6 +215,19 @@ public class Registration extends Activity implements LocationManagerInterface, 
                 folder.mkdir();
             }
         } catch (Exception ex) {
+        }
+
+    }
+
+
+    public static void createPendingFile() {
+        File folder = new File(fileName);
+        try {
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
 
     }
@@ -358,23 +370,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
         } catch (Exception e) {
             e.printStackTrace();
         }
-/*
-        if (checkSelfPermission(Manifest.permission.READ_PHONE_STATE)
-                != PackageManager.PERMISSION_GRANTED) {
 
-
-            if (shouldShowRequestPermissionRationale(
-                    Manifest.permission.READ_PHONE_STATE)) {
-
-            }
-
-            requestPermissions(new String[]{Manifest.permission.READ_PHONE_STATE},
-                    REQUEST_READ_PHONE_STATE);
-
-
-            return;
-        }
-*/
         final int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
         final int permissionCheck2 = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION);
         if ((permissionCheck != PackageManager.PERMISSION_GRANTED) && (permissionCheck2 != PackageManager.PERMISSION_GRANTED)) {
@@ -387,15 +383,17 @@ public class Registration extends Activity implements LocationManagerInterface, 
 
     }
 
+    @SuppressLint("ObsoleteSdkInt")
     private void config() {
 
-        btnTakePhoto = (Button) findViewById(R.id.btnTakePhoto);
-        btnqueue = (Button) findViewById(R.id.btnqueue);
-        btnArrival = (Button) findViewById(R.id.btnArrival);
-        btnMode = (Button) findViewById(R.id.mode);
-        btnconfig = (Button) findViewById(R.id.btnConfigration);
-        btn_Record = (Button) findViewById(R.id.btncheckvichle);
-        btnupdate = (Button) findViewById(R.id.btnupdate);
+        btnTakePhoto =  findViewById(R.id.btnTakePhoto);
+        btnqueue =  findViewById(R.id.btnqueue);
+        btnArrival =  findViewById(R.id.btnArrival);
+        btnMode =  findViewById(R.id.mode);
+        Button btnconfig = findViewById(R.id.btnConfigration);
+        btn_Record =  findViewById(R.id.btncheckvichle);
+        btnupdate =  findViewById(R.id.btnupdate);
+        createPendingFile();
         try {
             readfile_curruntdata();
         } catch (Exception e) {
@@ -410,35 +408,46 @@ public class Registration extends Activity implements LocationManagerInterface, 
             mLocationManager = new SmartLocationManager(getApplicationContext(), this, this, SmartLocationManager.ALL_PROVIDERS, LocationRequest.PRIORITY_HIGH_ACCURACY, 10 * 1000, 1 * 1000, SmartLocationManager.LOCATION_PROVIDER_RESTRICTION_NONE);
         } catch (Exception e) {
             e.getMessage();
+            e.printStackTrace();
+
         }
+
+
+        readfile_offline();
+        if(arrayList7.isEmpty()){
+             createPendingFile();
+            clearFolder2();
+            clearFolder();
+            CountFolder2();
+          //  Toast.makeText(application, "delete the ", Toast.LENGTH_SHORT).show();
+        }
+
         try {
             final int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE);
             if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_PHONE_STATE}, REQUEST_READ_PHONE_STATE);
             }
             TelephonyManager telephonyManager = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+            assert telephonyManager != null;
             GsmCellLocation cellLocation = (GsmCellLocation) telephonyManager.getCellLocation();
-            if (telephonyManager != null) {
-                DeviceId = telephonyManager.getDeviceId();
-            } else {
-                Toast.makeText(this, "Device id Not Found", Toast.LENGTH_SHORT).show();
-
-            }
-            if (isNetworkAvailable(this)) {
+            DeviceId = telephonyManager.getDeviceId();
+            //  if (isNetworkAvailable(this)) {
                 if (cellLocation != null) {
                     String cellid = String.valueOf(cellLocation.getCid());
                     CellLocation = cellLocation.toString();
                     GSM_CELL_ID = String.valueOf(cellid);
                     GSM_Location_Code = String.valueOf(cellid);
                 }
-            } else {
+
+           /* } else {
                 Toast.makeText(this, "No Service Provider Available", Toast.LENGTH_SHORT).show();
-            }
+            }*/
         } catch (Exception e) {
             e.getMessage();
+            e.printStackTrace();
         }
         String pattern = "dd-MMM-yy";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        @SuppressLint("SimpleDateFormat") SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         currunt_date = simpleDateFormat.format(new Date());
         try {
             date = simpleDateFormat.parse(currunt_date);
@@ -474,7 +483,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
 
                 }
             }
-            if ((indexid == null) || (indexid.equals(null)) || (indexid.equals(""))) {
+            if ((indexid == null)  || (indexid.equals(""))) {
                 verifyIMEI();
             }
             for (int i = 0; i < arrayIndex.size(); i++) {
@@ -491,14 +500,14 @@ public class Registration extends Activity implements LocationManagerInterface, 
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        assert date2 != null;
         if ((indexid != null) && (date2.compareTo(date) < 0)) {
             Toast.makeText(this, "Sorry! No access\n Only Authenticated user allowed here ", Toast.LENGTH_LONG).show();
             finish();
         }
         LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-
-        }
+        assert locationManager != null;
+        locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         readfileELPSatting();
         for (int i = 0; i < arrayList5.size(); i++) {
             txv = arrayList5.get(0).toString();
@@ -510,7 +519,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
             txv7 = arrayList5.get(6).toString();
             txv8 = arrayList5.get(7).toString();
             i = i + 8;
-            application.baseUrl = txv7.toString();
+            AppController.baseUrl = txv7.toString();
         }
         BufferedReader br = null;
         try {
@@ -521,8 +530,9 @@ public class Registration extends Activity implements LocationManagerInterface, 
         try {
             File dir44 = new File(path + fileSetting);
             if (dir44.exists()) {
+                assert br != null;
                 if (br.readLine() != null) {
-                    application.baseUrl = txv7.toString();
+                    AppController.baseUrl = txv7.toString();
                 }
             }
         } catch (IOException e) {
@@ -531,6 +541,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
 
         createFolder();
         createFolder2();
+        createPendingFile();
         createFolderElp();
         btnTakePhoto.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -574,6 +585,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
         });
         btnqueue.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 dilouge_Queue();
             }
 
@@ -712,6 +724,8 @@ public class Registration extends Activity implements LocationManagerInterface, 
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
 
 
+            }else {
+                Toast.makeText(application, "image is null", Toast.LENGTH_SHORT).show();
             }
             startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
 
@@ -737,30 +751,37 @@ public class Registration extends Activity implements LocationManagerInterface, 
                 tv8 = arrayList5.get(7).toString();
                 i = i + 8;
             }
+          //  write_file_offline();
+
         }
         String myfileName = tv5 + ("-") + tv6 + ("-") + timeStamp + ("-") + DeviceId.substring(10, 15) + ("-") + n /*+ ".PNG"*/;
+
         storageDir = new File(strSDCardPathName);
         image = File.createTempFile(myfileName, /* prefix */
                 ".PNG", /* suffix */
                 storageDir /* directory */
         );
+       //  imageArray.add(myfileName);
         return image;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if ((requestCode == REQUEST_TAKE_PHOTO) && (resultCode == RESULT_OK)) {
-            try {
+        if ((requestCode == REQUEST_TAKE_PHOTO) ) {
+
+                createPendingFile();
                 String path = image.getAbsolutePath().trim();
-                if (path == null)
-                    this.recreate();
-                else
+               // imageArray.add(path);
+
                 decodeFile(path, 640, 480);
-                if ((count > 2) && (!(path.equals(null)))) {
+                if (count > 2) {
                     write_file_offline();
+
+                    Log.d("show_image",imageArray.size()+"");
                     for (int i = 0; i < imageArray.size(); i++) {
                         String mfileName = imageArray.get(i).trim();
+                        String kk = mfileName;
                         FileHelper_offlineRegistration.saveToFile(mfileName);
                     }
                     if (isNetworkAvailable(this)) {
@@ -777,9 +798,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
                 } else {
                     capturImage();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+
         }
         if (resultCode == RESULT_CANCELED) {
             count = 0;
@@ -801,10 +820,10 @@ public class Registration extends Activity implements LocationManagerInterface, 
 
     }
 
-    public boolean uploadFiletoServer(String strSDPath, String strUrlServer) {
+    public void uploadFiletoServer(String strSDPath, String strUrlServer) {
         int bytesRead, bytesAvailable, bufferSize;
         byte[] buffer;
-        int maxBufferSize = 1 * 1024 * 1024;
+        int maxBufferSize = 1024 * 1024;
         int resCode = 0;
         String lineEnd = "\r\n";
         String twoHyphens = "--";
@@ -812,7 +831,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
         try {
             File file = new File(strSDPath);
             if (!file.exists()) {
-                return false;
+                return;
             }
 
             FileInputStream fileInputStream = new FileInputStream(new File(strSDPath));
@@ -860,28 +879,27 @@ public class Registration extends Activity implements LocationManagerInterface, 
             fileInputStream.close();
             outputStream.flush();
             outputStream.close();
-            return true;
         } catch (Exception ex) {
-            return false;
+            ex.printStackTrace();
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void CountFolder2() {
         try {
             File file = new File(path + "/upload" + "/");
             File[] list = file.listFiles();
+            assert list != null;
             for (File f : list) {
                 String name = f.getName();
                 counter++;
-                if (name.endsWith(".jpg") || name.endsWith(".mp3") || name.endsWith(".some media extention")) {
-
-                }
             }
             badge = new BadgeView(this, btnqueue);
             badge.setText("Pending:" + counter);
             badge.show();
         } catch (Exception e) {
             e.getMessage();
+            e.printStackTrace();
         }
     }
 
@@ -919,8 +937,20 @@ public class Registration extends Activity implements LocationManagerInterface, 
                 .setMessage("Are you sure you want to upload photos?")
                 .setPositiveButton("Upload", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+
+                         arrayList7.clear();
                         readfile_offline();
-                        new UploadAsync(Registration.this).execute();
+
+                        if(isNetworkAvailable(getApplicationContext())){
+                            if(arrayList7.size()>0){
+                                new UploadAsync(Registration.this).execute();
+                            }else {
+                                Toast.makeText(getApplicationContext(), "NO Pending Data", Toast.LENGTH_SHORT).show();
+                            }
+                        }else {
+                            Toast.makeText(getApplicationContext(), "No Internet available", Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 }).setNegativeButton("Delete", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
@@ -942,7 +972,8 @@ public class Registration extends Activity implements LocationManagerInterface, 
 
     public void password() {
         LayoutInflater li = LayoutInflater.from(Registration.this);
-        View promptsView = li.inflate(R.layout.prompts, null);
+        View promptsView;
+        promptsView = li.inflate(R.layout.prompts, null);
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 Registration.this);
         alertDialogBuilder.setView(promptsView);
@@ -995,7 +1026,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
 
     public void lock() {
         LayoutInflater li = LayoutInflater.from(Registration.this);
-        View promptsView = li.inflate(R.layout.prompts, null);
+        @SuppressLint("InflateParams") View promptsView = li.inflate(R.layout.prompts, null);
 
         final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                 Registration.this);
@@ -1018,7 +1049,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
                                     txv3 = arrayList5.get(2).toString();
                                     txv4 = arrayList5.get(3).toString();
                                     txv5 = arrayList5.get(4).toString();
-                                    txv6 = arrayList5.get(5).toString();
+                                   txv6 = arrayList5.get(5).toString();
                                     txv7 = arrayList5.get(6).toString();
                                     txv8 = arrayList5.get(7).toString();
                                     i = i + 8;
@@ -1054,39 +1085,73 @@ public class Registration extends Activity implements LocationManagerInterface, 
             String tev7 = null;
             String tev8 = null;
             String tev9 = null;
+
             if ((arrayList7.indexOf(0) != 0) && (arrayList7.size() > 0)) {
-                String tev = arrayList7.get(i).toString();
-                String tev2 = arrayList7.get(i + 1).toString();
+                String  k =  arrayList7.get(i).toString();
+                String longi = arrayList7.get(i + 1).toString();
                 String tev3 = arrayList7.get(i + 2).toString();
                 tev4 = arrayList7.get(i + 3).toString();
                 tev5 = arrayList7.get(i + 4).toString();
                 String tev6 = arrayList7.get(i + 5).toString();
-                tev7 = arrayList7.get(i + 6).toString();
-                tev8 = arrayList7.get(i + 7).toString();
-                tev9 = arrayList7.get(i + 8).toString();
+                    tev7 = arrayList7.get(i + 6).toString();
+                    tev8 = arrayList7.get(i + 7).toString();
+                    tev9 = arrayList7.get(i + 8).toString();
 
-
-                final String cell = GSM_Location_Code;
+                final String cell = tev3;
                 final String Cpcode = tev4.toString();
                 final String Lpcode = tev5.toString();
                 final String mfilename = tev7.toString();
                 final String mfilename2 = tev8.toString();
                 final String mfilename3 = tev9.toString();
-                String URL = application.baseUrl + application.URL2;
+                String URL = AppController.baseUrl + AppController.URL2;
                 final StringRequest stringRequest = new StringRequest(Request.Method.POST, URL,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(Registration.this, "Your Data Saved Successfully!",
+                                Toast.makeText(Registration.this, "Your Data Saved Successfully!1234",
                                         Toast.LENGTH_LONG).show();
+
+
+
                                 removelines();
                                 readfile_offline();
                                 if (arrayList7.size() > 0) {
                                     try {
+                                        if(arrayList7.isEmpty()){
+                                            clearFolder2();
+                                            clearFolder();
+                                            CountFolder2();
+                                            Intent i = new Intent(getApplicationContext(),Registration.class);
+                                            startActivity(i);
+                                            finish();
+
+
+
+                                        }
                                         save_pendingdata();
+
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
+                                }else {
+
+                                    final AlertDialog.Builder alertDialogBuilder = new AlertDialog.
+                                            Builder(Registration.this);
+                                    alertDialogBuilder.setTitle("Record Enter Successfully!");
+                                    alertDialogBuilder
+                                            .setCancelable(false)
+                                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                  //  Registration.this.finish();
+                                                    Intent i = new Intent(getApplicationContext(),Registration.class);
+                                                     startActivity(i);
+                                                      finish();
+                                                }
+                                            });
+
+                                    AlertDialog alertDialog = alertDialogBuilder.create();
+                                    alertDialog.show();
+
                                 }
                             }
                         },
@@ -1128,24 +1193,21 @@ public class Registration extends Activity implements LocationManagerInterface, 
         }
     }
 
-    private String decodeFile(String path, int DESIREDWIDTH, int DESIREDHEIGHT) {
-        String strMyImagePath = null;
+    public void decodeFile(String path, int DESIREDWIDTH, int DESIREDHEIGHT) {
+
         Bitmap scaledBitmap = null;
 
-        try {
+        //try {
             // Part 1: Decode image
             Bitmap unscaledBitmap = ScalingUtilities.decodeFile(path, DESIREDWIDTH, DESIREDHEIGHT, ScalingUtilities.ScalingLogic.FIT);
             if (!(unscaledBitmap.getWidth() <= DESIREDWIDTH && unscaledBitmap.getHeight() <= DESIREDHEIGHT)) {
                 // Part 2: Scale image
                 scaledBitmap = ScalingUtilities.createScaledBitmap(unscaledBitmap, DESIREDWIDTH, DESIREDHEIGHT, ScalingUtilities.ScalingLogic.FIT);
 
-            } else {
-                unscaledBitmap.recycle();
-                return path;
             }
-            if (android.os.Build.VERSION.SDK_INT == 24) {
-                scaledBitmap = rotateImage(scaledBitmap, 90);
-            }
+
+            //    scaledBitmap = rotateImage(unscaledBitmap, 180);
+
             // String extr = Environment.getExternalStorageDirectory().toString() + "/ELP";
             File mFolder = new File(strSDCardPathName2);
             if (!mFolder.exists()) {
@@ -1164,22 +1226,28 @@ public class Registration extends Activity implements LocationManagerInterface, 
                 tv8 = arrayList5.get(7).toString();
                 i = i + 8;
             }
+
             if (count == 1) {
                 myfileName = tv5 + ("-") + tv6 + ("-") + timeStamp + ("-") + DeviceId + ("-") + n + (".jpg");
                 fistname = myfileName.toString();
+                imageArray.add(myfileName);
+                Log.d("show_image",myfileName);
             }
             if (count == 2) {
                 myfileName = tv5 + ("-") + tv6 + ("-") + timeStamp + ("-") + DeviceId + ("-") + n + (".jpg");
                 secondname = myfileName.toString();
+                imageArray.add(myfileName);
+                Log.d("show_image",myfileName);
             }
             if (count == 3) {
                 myfileName = tv5 + ("-") + tv6 + ("-") + timeStamp + ("-") + DeviceId + ("-") + n + (".jpg");
-                this.therdname = myfileName.toString();
+                therdname = myfileName.toString();
+                imageArray.add(myfileName);
+                Log.d("show_image",myfileName);
             }
             File f = new File(mFolder.getAbsolutePath(), myfileName);
 
-            strMyImagePath = f.getAbsolutePath();
-            imageArray.add(myfileName);
+
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(f);
@@ -1196,14 +1264,9 @@ public class Registration extends Activity implements LocationManagerInterface, 
             }
 
             scaledBitmap.recycle();
-        } catch (Throwable e) {
-            e.getMessage();
-        }
 
-        if (strMyImagePath == null) {
-            return path;
-        }
-        return strMyImagePath;
+
+
 
     }
 
@@ -1238,13 +1301,12 @@ public class Registration extends Activity implements LocationManagerInterface, 
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while ((line = br.readLine()) != null) {
-                String lineWords[] = line.split("line.separator");
-                for (String singleWord : lineWords) {
-                    arrayList5.add(singleWord);
-                }
+                String[] lineWords = line.split("line.separator");
+                Collections.addAll(arrayList5, lineWords);
             }
             br.close();
-        } catch (IOException e) {
+        } catch (Exception ied) {
+            ied.printStackTrace();
         }
     }
 
@@ -1268,22 +1330,12 @@ public class Registration extends Activity implements LocationManagerInterface, 
     }
 
     public void write_file_offline() {
-        if (FileHelper_offlineRegistration.saveToFile(tv.toString())) {
-            Toast.makeText(Registration.this, "Saved to file", Toast.LENGTH_SHORT).show();
-        }
-        if (FileHelper_offlineRegistration.saveToFile(tv2.toString())) {
-        }
-        if (FileHelper_offlineRegistration.saveToFile(tv3.toString())) {
-        }
-        if (FileHelper_offlineRegistration.saveToFile(tv5.toString())) {
-        }
-        if (FileHelper_offlineRegistration.saveToFile(tv6.toString())) {
-        }
-
-        if (FileHelper_offlineRegistration.saveToFile(tv7.toString())) {
-        } else {
-            Toast.makeText(Registration.this, "Error save file!!!", Toast.LENGTH_SHORT).show();
-        }
+        FileHelper_offlineRegistration.saveToFile(String.valueOf(LNG)); // tv text replace with Lng
+        FileHelper_offlineRegistration.saveToFile(String.valueOf(LAT));
+        FileHelper_offlineRegistration.saveToFile(tv3.toString());
+        FileHelper_offlineRegistration.saveToFile(tv5.toString());
+         FileHelper_offlineRegistration.saveToFile(tv6.toString()) ;
+         FileHelper_offlineRegistration.saveToFile(tv7.toString());
     }
 
 
@@ -1299,13 +1351,12 @@ public class Registration extends Activity implements LocationManagerInterface, 
             BufferedReader br = new BufferedReader(new FileReader(file));
             String line;
             while ((line = br.readLine()) != null) {
-                String lineWords[] = line.split("line.separator");
-                for (String singleWord : lineWords) {
-                    arrayList7.add(singleWord);
-                }
+                String[] lineWords = line.split("line.separator");
+                arrayList7.addAll(Arrays.asList(lineWords));
             }
             br.close();
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -1313,7 +1364,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
     protected void onStart() {
         super.onStart();
         turnGPSOn();
-        try {
+       /* try {
             setMobileDataEnabled(Registration.this, true);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -1325,7 +1376,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
             e.printStackTrace();
         } catch (InvocationTargetException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -1365,11 +1416,7 @@ public class Registration extends Activity implements LocationManagerInterface, 
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.button1:
-                break;
-
-
+        if (view.getId() == R.id.button1) {
         }
     }
 
@@ -1538,9 +1585,10 @@ public class Registration extends Activity implements LocationManagerInterface, 
     }
 
 
+    @SuppressLint("StaticFieldLeak")
     public class UploadAsync extends AsyncTask<String, Void, Void> {
 
-        public UploadAsync(Registration activity) {
+        UploadAsync(Registration activity) {
             mProgressDialog = new ProgressDialog(activity);
             mProgressDialog.setTitle("Uploading");
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -1583,8 +1631,11 @@ public class Registration extends Activity implements LocationManagerInterface, 
                 conn = (HttpURLConnection) url.openConnection();
                 resCode = conn.getResponseCode();
                 if (resCode == HttpURLConnection.HTTP_OK) {
+
+
                     clearFolder2();
                     clearFolder();
+                    CountFolder2();
                     if (resMessage == null) {
                         resMessage = "No Images Found";
                     }
@@ -1644,4 +1695,8 @@ public class Registration extends Activity implements LocationManagerInterface, 
         });
 
     }
+
+
+
+
 }

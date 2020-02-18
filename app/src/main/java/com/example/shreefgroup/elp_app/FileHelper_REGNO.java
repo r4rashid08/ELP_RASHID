@@ -47,7 +47,7 @@ public class FileHelper_REGNO {
         return line;
     }
 
-    public static boolean saveToFile(String data) {
+    public static void saveToFile(String data) {
         try {
             new File(path).mkdir();
             File file = new File(path + regNo);
@@ -57,13 +57,11 @@ public class FileHelper_REGNO {
             FileOutputStream fileOutputStream = new FileOutputStream(file, true);
             fileOutputStream.write((data + System.getProperty("line.separator")).getBytes());
 
-            return true;
         } catch (FileNotFoundException ex) {
             Log.d(TAG, ex.getMessage());
         } catch (IOException ex) {
             Log.d(TAG, ex.getMessage());
         }
-        return false;
 
 
     }

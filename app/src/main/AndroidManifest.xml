@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.shreefgroup.elp_app">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.shreefgroup.elp_app">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -62,8 +63,11 @@
         android:icon="@drawable/elp_icon"
         android:allowClearUserData="true"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/security_xlm"
         android:supportsRtl="true"
-        android:theme="@style/appTheme">
+        android:theme="@style/appTheme"
+        android:largeHeap="true"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
             android:name=".Registration"
             android:screenOrientation="portrait">
@@ -75,8 +79,9 @@
         </activity>
         <receiver android:name=".NetworkChangeReceiver">
             <intent-filter>
-                <protected-broadcast android:name="android.intent.action.MEDIA_MOUNTED" />
-                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"
+                    tools:ignore="BatteryLife" />
             </intent-filter>
         </receiver>
         <activity
@@ -97,13 +102,13 @@
             android:windowSoftInputMode="stateHidden" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
     </application>
 
